@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สำนักงานคณะกรรมการการเลือกตั้ง</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue:    #003087;
+    --blue-mid:#004AAD;
+    --blue-lt: #E8F0FB;
+    --gold:    #C9A84C;
+    --gold-lt: #FFF8E7;
+    --red:     #C0392B;
+    --white:   #FFFFFF;
+    --gray-bg: #F5F7FA;
+    --gray-bd: #DDE3ED;
+    --text:    #1A1A2E;
+    --text-sm: #556080;
+  }
+
+  body { font-family: 'Sarabun', sans-serif; color: var(--text); background: var(--white); font-size: 16px; line-height: 1.6; }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--blue);
+    color: #aec6f0;
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 2px solid var(--gold);
+  }
+  .topbar-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
+  }
+  .topbar a { color: #aec6f0; text-decoration: none; margin-left: 16px; }
+  .topbar a:hover { color: var(--gold); }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-bd);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,48,135,.10);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    height: 76px;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--text); }
+  .logo-emblem {
+    width: 56px; height: 56px; flex-shrink: 0;
+    background: var(--blue); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 3px solid var(--gold);
+    position: relative; overflow: hidden;
+  }
+  .logo-emblem svg { width: 34px; height: 34px; }
+  .logo-text { line-height: 1.25; }
+  .logo-text .en { font-size: 11px; color: var(--text-sm); letter-spacing: .04em; text-transform: uppercase; font-weight: 500; }
+  .logo-text .th { font-size: 15px; font-weight: 700; color: var(--blue); }
+
+  nav { display: flex; align-items: center; gap: 4px; }
+  nav a {
+    font-size: 14.5px; font-weight: 500; color: var(--text);
+    text-decoration: none; padding: 8px 14px; border-radius: 6px;
+    transition: background .18s, color .18s;
+    white-space: nowrap;
+  }
+  nav a:hover { background: var(--blue-lt); color: var(--blue); }
+  nav a.active { background: var(--blue); color: var(--white); }
+
+  .btn-search {
+    background: none; border: 1.5px solid var(--gray-bd); border-radius: 8px;
+    padding: 7px 14px; font-family: inherit; font-size: 14px; color: var(--text-sm);
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    transition: border-color .2s;
+  }
+  .btn-search:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #001d5e 0%, #003087 55%, #004AAD 100%);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: .5;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 64px 24px 56px;
+    display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: center;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,.18); border: 1px solid rgba(201,168,76,.4);
+    color: var(--gold); border-radius: 20px;
+    padding: 5px 14px; font-size: 13px; font-weight: 600; margin-bottom: 20px;
+  }
+  .hero-tag span { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+  .hero h1 em { color: var(--gold); font-style: normal; display: block; }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,.75); max-width: 500px; margin-bottom: 36px; font-weight: 300; line-height: 1.7; }
+
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: #1A1A00;
+    border: none; border-radius: 8px;
+    padding: 13px 28px; font-family: inherit; font-size: 15px; font-weight: 700;
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: transform .18s, box-shadow .18s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.4); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1.5px solid rgba(255,255,255,.4);
+    border-radius: 8px; padding: 13px 28px;
+    font-family: inherit; font-size: 15px; font-weight: 600;
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: background .18s, border-color .18s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.7); }
+
+  /* hero stats card */
+  .hero-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px; padding: 28px;
+    backdrop-filter: blur(10px);
+  }
+  .hero-card h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--gold); margin-bottom: 20px; }
+  .stat-row { display: flex; flex-direction: column; gap: 16px; }
+  .stat-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,.65); }
+  .stat-val { font-size: 22px; font-weight: 800; color: var(--white); }
+  .stat-val small { font-size: 13px; font-weight: 400; color: rgba(255,255,255,.5); margin-left: 4px; }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: var(--gold-lt); border-top: 3px solid var(--gold); border-bottom: 1px solid #e8d89a;
+  }
+  .alert-inner {
+    max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .alert-badge {
+    background: var(--red); color: var(--white);
+    font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    padding: 4px 10px; border-radius: 4px; white-space: nowrap;
+  }
+  .alert-inner p { font-size: 14.5px; color: #5a4000; font-weight: 500; flex: 1; }
+  .alert-inner a { color: var(--blue); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .alert-inner a:hover { text-decoration: underline; }
+
+  /* ── QUICK LINKS ── */
+  .quick-links { background: var(--white); padding: 48px 0; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section-title {
+    font-size: 22px; font-weight: 700; color: var(--blue);
+    margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background: var(--gray-bd); }
+
+  .qlink-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .qlink-card {
+    border: 1.5px solid var(--gray-bd); border-radius: 12px;
+    padding: 24px 20px; text-align: center; text-decoration: none; color: var(--text);
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .qlink-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(0,48,135,.1); transform: translateY(-3px); }
+  .qlink-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 24px;
+  }
+  .qlink-card span { font-size: 14px; font-weight: 600; line-height: 1.35; }
+
+  /* ── MAIN CONTENT GRID ── */
+  .main-section { background: var(--gray-bg); padding: 56px 0; }
+  .main-grid { display: grid; grid-template-columns: 1fr 360px; gap: 32px; }
+
+  /* news */
+  .news-list { display: flex; flex-direction: column; gap: 0; }
+  .news-item {
+    display: grid; grid-template-columns: 100px 1fr; gap: 16px; align-items: start;
+    padding: 20px 0; border-bottom: 1px solid var(--gray-bd); text-decoration: none; color: var(--text);
+    transition: background .15s;
+  }
+  .news-item:first-child { padding-top: 0; }
+  .news-item:hover .news-title { color: var(--blue); }
+  .news-thumb {
+    width: 100px; height: 72px; object-fit: cover; border-radius: 8px;
+    background: var(--blue-lt);
+    display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0;
+  }
+  .news-cat {
+    font-size: 11px; font-weight: 700; letter-spacing: .07em;
+    color: var(--white); background: var(--blue-mid);
+    padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 5px;
+  }
+  .news-cat.red { background: var(--red); }
+  .news-title { font-size: 15px; font-weight: 600; line-height: 1.45; margin-bottom: 4px; }
+  .news-date { font-size: 12.5px; color: var(--text-sm); }
+
+  /* sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 24px; }
+  .card {
+    background: var(--white); border: 1px solid var(--gray-bd);
+    border-radius: 12px; overflow: hidden;
+  }
+  .card-header {
+    background: var(--blue); color: var(--white);
+    padding: 14px 20px; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-body { padding: 20px; }
+
+  .election-status { display: flex; flex-direction: column; gap: 12px; }
+  .estatus-item { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .estatus-item .label { color: var(--text-sm); }
+  .estatus-item .value { font-weight: 700; color: var(--blue); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .badge.green { background: #e6f9f0; color: #1a7a4a; }
+  .badge.orange { background: #fff3e0; color: #b85d00; }
+  .badge.gray { background: #f0f0f0; color: #666; }
+
+  .announce-list { display: flex; flex-direction: column; gap: 0; }
+  .ann-item {
+    padding: 13px 0; border-bottom: 1px solid var(--gray-bd);
+    text-decoration: none; color: var(--text);
+    display: block; font-size: 14px; font-weight: 500; line-height: 1.45;
+    transition: color .15s;
+  }
+  .ann-item:last-child { border-bottom: none; }
+  .ann-item:hover { color: var(--blue); }
+  .ann-date { font-size: 12px; color: var(--text-sm); margin-top: 3px; }
+
+  /* ── SERVICES ── */
+  .services-section { background: var(--white); padding: 56px 0; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .svc-card {
+    border: 1.5px solid var(--gray-bd); border-radius: 14px; padding: 28px 24px;
+    text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 12px;
+    transition: box-shadow .2s, transform .2s, border-color .2s;
+  }
+  .svc-card:hover { box-shadow: 0 8px 32px rgba(0,48,135,.12); transform: translateY(-4px); border-color: var(--blue); }
+  .svc-icon { font-size: 36px; }
+  .svc-title { font-size: 17px; font-weight: 700; color: var(--blue); }
+  .svc-desc { font-size: 14px; color: var(--text-sm); line-height: 1.6; }
+  .svc-arrow { margin-top: auto; color: var(--blue); font-size: 20px; }
+
+  /* ── FOOTER ── */
+  footer { background: #001050; color: rgba(255,255,255,.7); padding: 56px 0 0; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
+  .footer-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .footer-logo-circle {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--white);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .footer-logo-circle svg { width: 30px; }
+  .footer-brand { font-size: 14px; font-weight: 700; color: var(--white); line-height: 1.35; }
+  .footer-desc { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,.55); margin-bottom: 20px; }
+  .footer-social { display: flex; gap: 10px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.6); font-size: 16px; text-decoration: none;
+    transition: background .18s, color .18s;
+  }
+  .social-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+
+  footer h4 { font-size: 13px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 16px; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  footer ul li a { color: rgba(255,255,255,.6); text-decoration: none; font-size: 14px; transition: color .15s; }
+  footer ul li a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 20px 0; display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px; font-size: 13px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    .main-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav { display: none; }
+  }
+  @media(max-width:600px){
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .qlink-grid { grid-template-columns: repeat(3,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>เว็บไซต์อย่างเป็นทางการของสำนักงานคณะกรรมการการเลือกตั้ง</span>
+    <div>
+      <a href="#">ภาษาไทย</a>
+      <a href="#">English</a>
+      <a href="#">ติดต่อเรา</a>
+      <a href="#">แผนผังเว็บไซต์</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo-wrap">
+      <div class="logo-emblem">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylized ballot/vote icon -->
+          <rect x="5" y="4" width="24" height="26" rx="3" fill="none" stroke="#C9A84C" stroke-width="2"/>
+          <path d="M10 12h14M10 17h10M10 22h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="25" cy="22" r="5" fill="#C9A84C"/>
+          <path d="M22.5 22l1.5 1.5 3-3" stroke="#001050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="en">Election Commission of Thailand</div>
+        <div class="th">สำนักงาน กกต.</div>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#" class="active">หน้าแรก</a>
+      <a href="#">เกี่ยวกับ กกต.</a>
+      <a href="#">การเลือกตั้ง</a>
+      <a href="#">กฎหมาย</a>
+      <a href="#">ประกาศ</a>
+      <a href="#">ข่าวสาร</a>
+    </nav>
+
+    <button class="btn-search">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      ค้นหา
+    </button>
+  </div>
+</header>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner">
+  <div class="alert-inner">
+    <span class="alert-badge">ประกาศ</span>
+    <p>เปิดรับสมัครเลือกตั้งสมาชิกสภาท้องถิ่นและผู้บริหารท้องถิ่น ประจำปี พ.ศ. ๒๕๖๘ — ตรวจสอบรายชื่อผู้มีสิทธิ์เลือกตั้งได้แล้ววันนี้</p>
+    <a href="#">ดูรายละเอียด →</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">
+        <span></span>
+        อัปเดตสถานะการเลือกตั้ง
+      </div>
+      <h1>
+        ประชาธิปไตย<br>
+        <em>เริ่มต้นที่คุณ</em>
+      </h1>
+      <p class="hero-sub">
+        สำนักงานคณะกรรมการการเลือกตั้ง มุ่งมั่นจัดการเลือกตั้งที่บริสุทธิ์ ยุติธรรม
+        โปร่งใส เพื่อให้ประชาชนชาวไทยมีส่วนร่วมในการปกครองระบอบประชาธิปไตย
+      </p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">🗳️ ตรวจสอบสิทธิ์เลือกตั้ง</a>
+        <a href="#" class="btn-outline">📋 ประกาศผลการเลือกตั้ง</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>ข้อมูลสถิติการเลือกตั้ง</h3>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-label">ผู้มีสิทธิ์เลือกตั้ง</div>
+          <div class="stat-val">52.3<small>ล้านคน</small></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">หน่วยเลือกตั้งทั่วประเทศ</div>
+          <div class="stat-val">95,694<small>หน่วย</small></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">จังหวัดทั่วประเทศ</div>
+          <div class="stat-val">77<small>จังหวัด</small></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">อัตราผู้ออกมาใช้สิทธิ์</div>
+          <div class="stat-val">75.2<small>%</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<section class="quick-links">
+  <div class="section-inner">
+    <div class="section-title">บริการด่วน</div>
+    <div class="qlink-grid">
+      <a href="#" class="qlink-card">
+        <div class="qlink-icon" style="background:#E8F0FB">📋</div>
+        <span>ตรวจสอบรายชื่อผู้มีสิทธิ์</span>
+      </a>
+      <a href="#" class="qlink-card">
+        <div class="qlink-icon" style="background:#FFF8E7">🗳️</div>
+        <span>ลงทะเบียนเลือกตั้งนอกเขต</span>
+      </a>
+      <a href="#" class="qlink-card">
+        <div class="qlink-icon" style="background:#fde8e8">📊</div>
+        <span>ผลการเลือกตั้ง</span>
+      </a>
+      <a href="#" class="qlink-card">
+        <div class="qlink-icon" style="background:#e8f9f0">📍</div>
+        <span>ค้นหาหน่วยเลือกตั้ง</span>
+      </a>
+      <a href="#" class="qlink-card">
+        <div class="qlink-icon" style="background:#f3e8ff">📜</div>
+        <span>กฎหมายเลือกตั้ง</span>
+      </a>
+      <a href="#" class="qlink-card">
+        <div class="qlink-icon" style="background:#e8f9fb">📢</div>
+        <span>แจ้งเบาะแสทุจริต</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS + SIDEBAR -->
+<section class="main-section">
+  <div class="section-inner">
+    <div class="main-grid">
+      <!-- NEWS -->
+      <div>
+        <div class="section-title">ข่าวสารและประกาศ</div>
+        <div class="news-list">
+
+          <a href="#" class="news-item">
+            <div class="news-thumb">📰</div>
+            <div>
+              <span class="news-cat red">ด่วน</span>
+              <div class="news-title">กกต. ประกาศกำหนดวันเลือกตั้งสมาชิกสภาท้องถิ่นและผู้บริหารท้องถิ่น ๗๕ จังหวัด</div>
+              <div class="news-date">10 มิถุนายน 2568</div>
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <div class="news-thumb">🏛️</div>
+            <div>
+              <span class="news-cat">ประชาสัมพันธ์</span>
+              <div class="news-title">สำนักงาน กกต. เปิดรับฟังความคิดเห็นประชาชนต่อร่างระเบียบการเลือกตั้งฉบับใหม่</div>
+              <div class="news-date">8 มิถุนายน 2568</div>
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <div class="news-thumb">🎓</div>
+            <div>
+              <span class="news-cat">กิจกรรม</span>
+              <div class="news-title">โครงการอบรมคณะกรรมการประจำหน่วยเลือกตั้ง ประจำปี ๒๕๖๘ รอบที่ ๒</div>
+              <div class="news-date">5 มิถุนายน 2568</div>
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <div class="news-thumb">🌐</div>
+            <div>
+              <span class="news-cat">ดิจิทัล</span>
+              <div class="news-title">กกต. เปิดตัวแอปพลิเคชัน Smart Vote ช่วยประชาชนค้นหาข้อมูลผู้สมัครก่อนวันเลือกตั้ง</div>
+              <div class="news-date">3 มิถุนายน 2568</div>
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <div class="news-thumb">⚖️</div>
+            <div>
+              <span class="news-cat">วินิจฉัย</span>
+              <div class="news-title">คำวินิจฉัยคณะกรรมการการเลือกตั้งเกี่ยวกับคุณสมบัติผู้สมัครรับเลือกตั้ง ฉบับที่ ๑๒/๒๕๖๘</div>
+              <div class="news-date">1 มิถุนายน 2568</div>
+            </div>
+          </a>
+
+        </div>
+        <div style="text-align:center;margin-top:28px">
+          <a href="#" style="color:var(--blue);font-weight:600;font-size:14.5px;text-decoration:none">ดูข่าวสารทั้งหมด →</a>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <div class="card">
+          <div class="card-header">🗓️ สถานะการเลือกตั้ง</div>
+          <div class="card-body">
+            <div class="election-status">
+              <div class="estatus-item">
+                <span class="label">การเลือกตั้งท้องถิ่น</span>
+                <span class="badge green">กำลังดำเนินการ</span>
+              </div>
+              <div class="estatus-item">
+                <span class="label">วันเลือกตั้ง</span>
+                <span class="value">20 ก.ค. 2568</span>
+              </div>
+              <div class="estatus-item">
+                <span class="label">รับสมัครผู้สมัคร</span>
+                <span class="badge orange">1–5 ก.ค. 2568</span>
+              </div>
+              <div class="estatus-item">
+                <span class="label">การเลือกตั้งนอกราชอาณาจักร</span>
+                <span class="badge gray">ยังไม่กำหนด</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">📌 ประกาศล่าสุด</div>
+          <div class="card-body">
+            <div class="announce-list">
+              <a href="#" class="ann-item">
+                ประกาศ กกต. เรื่องกำหนดวันออกเสียงลงคะแนน ครั้งที่ ๑๕/๒๕๖๘
+                <div class="ann-date">10 มิ.ย. 2568</div>
+              </a>
+              <a href="#" class="ann-item">
+                ระเบียบคณะกรรมการเลือกตั้งว่าด้วยการหาเสียง พ.ศ. ๒๕๖๘
+                <div class="ann-date">7 มิ.ย. 2568</div>
+              </a>
+              <a href="#" class="ann-item">
+                ประกาศผลการเลือกตั้งสมาชิกสภาจังหวัด จ.เชียงใหม่
+                <div class="ann-date">4 มิ.ย. 2568</div>
+              </a>
+              <a href="#" class="ann-item">
+                คู่มือกรรมการประจำหน่วยเลือกตั้ง ฉบับปรับปรุง ๒๕๖๘
+                <div class="ann-date">1 มิ.ย. 2568</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">📞 ติดต่อสายด่วน</div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:14px">
+            <div style="text-align:center">
+              <div style="font-size:36px;font-weight:800;color:var(--blue)">1444</div>
+              <div style="font-size:13px;color:var(--text-sm)">สายด่วนการเลือกตั้ง (ตลอด 24 ชั่วโมง)</div>
+            </div>
+            <div style="border-top:1px solid var(--gray-bd);padding-top:14px;font-size:13.5px;color:var(--text-sm);line-height:1.7">
+              📍 ศูนย์ราชการเฉลิมพระเกียรติ อาคาร B ชั้น 4<br>
+              ถนนแจ้งวัฒนะ หลักสี่ กรุงเทพฯ 10210<br>
+              ✉️ saraban@ect.go.th
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-inner">
+    <div class="section-title">บริการออนไลน์</div>
+    <div class="services-grid">
+
+      <a href="#" class="svc-card">
+        <div class="svc-icon">🗳️</div>
+        <div class="svc-title">ระบบลงทะเบียนเลือกตั้งนอกเขต</div>
+        <div class="svc-desc">ลงทะเบียนขอใช้สิทธิ์เลือกตั้งนอกเขตจังหวัด สำหรับผู้ที่พำนักอยู่นอกภูมิลำเนา</div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card">
+        <div class="svc-icon">🔍</div>
+        <div class="svc-title">ตรวจสอบรายชื่อผู้มีสิทธิ์เลือกตั้ง</div>
+        <div class="svc-desc">ค้นหาชื่อของท่านในบัญชีรายชื่อผู้มีสิทธิ์เลือกตั้ง พร้อมดูข้อมูลหน่วยเลือกตั้ง</div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card">
+        <div class="svc-icon">📊</div>
+        <div class="svc-title">ผลการนับคะแนนแบบเรียลไทม์</div>
+        <div class="svc-desc">ติดตามผลการนับคะแนนเลือกตั้งสด ครบถ้วนทุกเขต ทุกหน่วยเลือกตั้งทั่วประเทศ</div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card">
+        <div class="svc-icon">📄</div>
+        <div class="svc-title">ระบบยื่นบัญชีทรัพย์สิน</div>
+        <div class="svc-desc">ระบบสำหรับผู้สมัครรับเลือกตั้งยื่นแบบแสดงรายการทรัพย์สินและหนี้สิน</div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card">
+        <div class="svc-icon">📢</div>
+        <div class="svc-title">แจ้งเบาะแสการทุจริต</div>
+        <div class="svc-desc">แจ้งข้อมูลการทุจริต การซื้อสิทธิ์ขายเสียง หรือการกระทำผิดกฎหมายเลือกตั้ง</div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+      <a href="#" class="svc-card">
+        <div class="svc-icon">📱</div>
+        <div class="svc-title">Smart Vote Application</div>
+        <div class="svc-desc">แอปพลิเคชันช่วยผู้มีสิทธิ์เลือกตั้งค้นหาข้อมูลผู้สมัคร นโยบาย และหน่วยเลือกตั้ง</div>
+        <div class="svc-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="section-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-circle">
+            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="3" width="22" height="24" rx="3" fill="none" stroke="#003087" stroke-width="2"/>
+              <path d="M9 11h12M9 16h9M9 21h6" stroke="#003087" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="22" cy="20" r="4.5" fill="#C9A84C"/>
+              <path d="M20 20l1.5 1.5 2.5-2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="footer-brand">สำนักงานคณะกรรมการการเลือกตั้ง<br><span style="font-weight:400;font-size:12px;color:rgba(255,255,255,.5)">Election Commission of Thailand</span></div>
+        </div>
+        <p class="footer-desc">
+          ทำหน้าที่จัดการเลือกตั้งสมาชิกสภาผู้แทนราษฎร สมาชิกวุฒิสภา
+          สมาชิกสภาท้องถิ่น และผู้บริหารท้องถิ่น ตลอดจนการออกเสียงประชามติ
+          ให้เป็นไปโดยสุจริตและเที่ยงธรรม
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">🐦</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">ig</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>เกี่ยวกับองค์กร</h4>
+        <ul>
+          <li><a href="#">ประวัติและบทบาท</a></li>
+          <li><a href="#">โครงสร้างองค์กร</a></li>
+          <li><a href="#">คณะกรรมการ กกต.</a></li>
+          <li><a href="#">วิสัยทัศน์และพันธกิจ</a></li>
+          <li><a href="#">แผนยุทธศาสตร์</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>บริการประชาชน</h4>
+        <ul>
+          <li><a href="#">ตรวจสอบสิทธิ์เลือกตั้ง</a></li>
+          <li><a href="#">ลงทะเบียนนอกเขต</a></li>
+          <li><a href="#">ผลการเลือกตั้ง</a></li>
+          <li><a href="#">ค้นหาหน่วยเลือกตั้ง</a></li>
+          <li><a href="#">แจ้งเบาะแส</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>ข้อมูลและทรัพยากร</h4>
+        <ul>
+          <li><a href="#">กฎหมายเลือกตั้ง</a></li>
+          <li><a href="#">ดาวน์โหลดเอกสาร</a></li>
+          <li><a href="#">สถิติการเลือกตั้ง</a></li>
+          <li><a href="#">ห้องสมุด กกต.</a></li>
+          <li><a href="#">Open Data</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© ๒๕๖๘ สำนักงานคณะกรรมการการเลือกตั้ง — สงวนลิขสิทธิ์</span>
+      <div style="display:flex;gap:20px">
+        <a href="#" style="color:rgba(255,255,255,.5);text-decoration:none">นโยบายความเป็นส่วนตัว</a>
+        <a href="#" style="color:rgba(255,255,255,.5);text-decoration:none">เงื่อนไขการใช้งาน</a>
+        <a href="#" style="color:rgba(255,255,255,.5);text-decoration:none">แผนผังเว็บไซต์</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
